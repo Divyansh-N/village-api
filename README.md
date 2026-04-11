@@ -1,38 +1,73 @@
-# Village API Project
+# 🌍 Village API
 
-## 📌 Overview
-This project provides a hierarchical API for accessing Indian location data:
-Country → State → District → Sub-District → Village
+A scalable backend API for accessing hierarchical location data across India (State → District → Sub-District → Village).
 
-## 🚀 Tech Stack
-- Backend: Node.js + Express.js
-- Database: PostgreSQL (NeonDB)
-- Data Processing: Python (Pandas)
+## 🚀 Live API
 
-## 📊 Features
-- Fetch all states
-- Fetch districts by state
-- Fetch sub-districts by district
-- Fetch villages by sub-district
-- Processed 30,000+ village records
+🔗 https://village-api-peach.vercel.app
 
-## 🔗 API Endpoints
+---
 
-- GET /states
-- GET /districts?state_id=ID
-- GET /subdistricts?district_id=ID
-- GET /villages?subdistrict_id=ID
+## 📌 Features
 
-## ⚙️ Setup
+* 🔍 Search villages by name
+* 📍 Hierarchical location structure
+* ⚡ Fast API responses
+* 🔐 API Key Authentication
+* 🌐 Deployed on Vercel
 
-### Backend
-cd backend  
-npm install  
-node index.js  
+---
 
-### Data Import
-cd data-import  
-python import.py  
+## 🛠️ Tech Stack
 
-## 📌 Author
+* **Backend:** Node.js, Express.js
+* **Database:** PostgreSQL (NeonDB)
+* **ORM:** Prisma
+* **Deployment:** Vercel
+
+---
+
+## 📊 Data
+
+* 45,000+ villages imported
+* Structured as:
+
+  * Country → State → District → Sub-District → Village
+
+---
+
+## 🔑 API Usage
+
+### Example Endpoint:
+
+GET /v1/states
+
+### Headers:
+
+X-API-Key: test123
+
+---
+
+## 📦 Installation (Local Setup)
+
+```bash
+git clone https://github.com/Divyansh-N/village-api.git
+cd village-api
+npm install
+npm start
+```
+
+---
+
+## 📈 Future Improvements
+
+* Frontend Dashboard (React)
+* Rate Limiting (Redis)
+* User Authentication (JWT)
+* Admin Panel
+
+---
+
+## 👨‍💻 Author
+
 Divyansh Nayyar

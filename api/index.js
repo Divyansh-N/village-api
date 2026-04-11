@@ -170,4 +170,6 @@ app.get("/v1/autocomplete", async (req, res) => {
 });
 
 // START SERVER
-module.exports = app;
+app.listen(3000, () => {
+  console.log("Server running on port 3000 🚀");
+});

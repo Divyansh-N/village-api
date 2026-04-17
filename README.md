@@ -1,73 +1,122 @@
-# 🌍 Village API
+# 🌍 Village API System
 
-A scalable backend API for accessing hierarchical location data across India (State → District → Sub-District → Village).
+## 📌 Overview
 
-## 🚀 Live API
+Village API System is a full-stack web application that allows users to explore hierarchical location data including states, districts, subdistricts, and villages.
 
-🔗 https://village-api-peach.vercel.app
+The system provides a clean and interactive frontend connected to secure backend APIs.
 
 ---
 
-## 📌 Features
+## 🚀 Features
 
-* 🔍 Search villages by name
-* 📍 Hierarchical location structure
-* ⚡ Fast API responses
-* 🔐 API Key Authentication
-* 🌐 Deployed on Vercel
+* Load states dynamically
+* View districts, subdistricts, and villages
+* Search villages using keyword
+* Click and select village (interactive UI)
+* API key-based security for all endpoints
+* Clean and responsive user interface
 
 ---
 
 ## 🛠️ Tech Stack
 
-* **Backend:** Node.js, Express.js
-* **Database:** PostgreSQL (NeonDB)
-* **ORM:** Prisma
-* **Deployment:** Vercel
+* **Frontend:** HTML, CSS, JavaScript
+* **Backend:** Node.js, Express
+* **Database:** PostgreSQL
+* **Authentication:** API Key
 
 ---
 
-## 📊 Data
+## 🔑 API Security
 
-* 45,000+ villages imported
-* Structured as:
+All API endpoints are protected using an API key.
 
-  * Country → State → District → Sub-District → Village
+Example:
 
----
+```
+x-api-key: test123
+```
 
-## 🔑 API Usage
-
-### Example Endpoint:
-
-GET /v1/states
-
-### Headers:
-
-X-API-Key: test123
+This ensures that only authorized requests can access the data.
 
 ---
 
-## 📦 Installation (Local Setup)
+## 📂 Project Structure
 
-```bash
-git clone https://github.com/Divyansh-N/village-api.git
-cd village-api
-npm install
-npm start
+```
+Village-api/
+│
+├── backend/          # Express server & APIs
+├── frontend/         # HTML, CSS, JS UI
+├── prisma/           # Database schema
+├── data-import/      # Dataset files
+├── package.json
+└── README.md
 ```
 
 ---
 
-## 📈 Future Improvements
+## ▶️ How to Run the Project
 
-* Frontend Dashboard (React)
-* Rate Limiting (Redis)
-* User Authentication (JWT)
-* Admin Panel
+### 🔹 Step 1: Run Backend
+
+Open terminal:
+
+```
+cd backend
+node index.js
+```
+
+You should see:
+
+```
+Server running on http://localhost:3000
+```
+
+---
+
+### 🔹 Step 2: Run Frontend
+
+* Open `frontend/index.html`
+* Right click → **Open with Live Server**
+
+---
+
+## 🧪 Usage Flow
+
+1. Click **Load States**
+2. Select a state
+3. Select district → subdistrict → village
+4. Use search to find villages
+5. Click on a village to select it
+
+---
+
+## 🎥 Demo Video
+
+(Add your Google Drive video link here)
+
+---
+
+## 📌 Future Improvements
+
+* Add user authentication system
+* Integrate maps (Google Maps API)
+* Improve UI/UX with frameworks like React
+* Add real-time updates
 
 ---
 
 ## 👨‍💻 Author
 
-Divyansh Nayyar
+**Divyansh Nayyar**
+B.Tech AIML Student
+
+---
+
+## ⭐ Conclusion
+
+This project demonstrates a complete full-stack implementation including frontend UI, backend APIs, database integration, and secure communication.
+
+---

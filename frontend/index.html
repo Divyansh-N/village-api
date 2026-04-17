@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Village Explorer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            text-align: center;
+            margin: 0;
+            color: white;
+        }
+
+        h1 { margin-top: 20px; }
+
+        .container {
+            background: white;
+            color: black;
+            padding: 20px;
+            margin: 20px auto;
+            width: 420px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+        }
+
+        select, input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5a67d8;
+        }
+
+        .card {
+            background: #f1f1f1;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            background: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🌍 Village Explorer</h1>
+
+<div class="container">
+    <h3>Select Location</h3>
+
+    <button onclick="loadStates()">Load States</button>
+
+    <select id="states" onchange="loadDistricts()"></select>
+    <select id="districts" onchange="loadSubdistricts()"></select>
+    <select id="subdistricts" onchange="loadVillages()"></select>
+    <select id="villages"></select>
+</div>
+
+<div class="container">
+    <h3>Search Village</h3>
+
+    <input type="text" id="search" placeholder="Enter village name">
+    <button onclick="searchVillage()">Search</button>
+
+    <div id="results"></div>
+    <div id="selectedVillage" style="margin-top:15px; font-weight:bold; color:green;"></div>
+</div>
+
+<script>
+const API_URL = "http://localhost:3000";
+
+const headers = {
+    "x-api-key": "test123",
+    "Content-Type": "application/json"
+};
+
+// STATES
+function loadStates() {
+    fetch(`${API_URL}/v1/states`, { headers })
+    .then(res => res.json())
+    .then(data => {
+        let options = "<option>Select State</option>";
+        data.data.forEach(s => {
+            options += `<option value="${s.id}">${s.name}</option>`;
+        });
+        document.getElementById("states").innerHTML = options;
+    });
+}
+
+// DISTRICTS
+function loadDistricts() {
+    const id = document.getElementById("states").value;
+    if (!id) return;
+
+    fetch(`${API_URL}/v1/districts?state_id=${id}`, { headers })
+    .then(res => res.json())
+    .then(data => {
+        let options = "<option>Select District</option>";
+        data.data.forEach(d => {
+            options += `<option value="${d.id}">${d.name}</option>`;
+        });
+        document.getElementById("districts").innerHTML = options;
+    });
+}
+
+// SUBDISTRICTS
+function loadSubdistricts() {
+    const id = document.getElementById("districts").value;
+    if (!id) return;
+
+    fetch(`${API_URL}/v1/subdistricts?district_id=${id}`, { headers })
+    .then(res => res.json())
+    .then(data => {
+        let options = "<option>Select Subdistrict</option>";
+        data.data.forEach(sd => {
+            options += `<option value="${sd.id}">${sd.name}</option>`;
+        });
+        document.getElementById("subdistricts").innerHTML = options;
+    });
+}
+
+// VILLAGES
+function loadVillages() {
+    const id = document.getElementById("subdistricts").value;
+    if (!id) return;
+
+    fetch(`${API_URL}/v1/villages?subdistrict_id=${id}`, { headers })
+    .then(res => res.json())
+    .then(data => {
+        let options = "<option>Select Village</option>";
+
+        if (data.data.length === 0) {
+            options += `<option>No villages found</option>`;
+        } else {
+            data.data.forEach(v => {
+                options += `<option value="${v.id}">${v.name}</option>`;
+            });
+        }
+
+        document.getElementById("villages").innerHTML = options;
+    });
+}
+
+// SEARCH + CLICKABLE RESULTS
+function searchVillage() {
+    const query = document.getElementById("search").value;
+
+    fetch(`${API_URL}/v1/search?q=${query}`, { headers })
+    .then(res => res.json())
+    .then(data => {
+        let output = "";
+
+        data.data.forEach(v => {
+            output += `
+                <div class="card" onclick="selectVillage('${v.name}')">
+                    📍 ${v.name}
+                </div>
+            `;
+        });
+
+        document.getElementById("results").innerHTML = output;
+    });
+}
+
+// CLICK ACTION
+function selectVillage(name) {
+    document.getElementById("search").value = name;
+
+    document.getElementById("selectedVillage").innerHTML = 
+        "✅ Selected Village: " + name;
+}
+</script>
+
+</body>
+</html>

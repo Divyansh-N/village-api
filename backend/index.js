@@ -1,8 +1,10 @@
+const cors = require("cors");
 const express = require("express");
 const { Pool } = require("pg");
 require("dotenv").config();
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 const API_KEY = "test123";
 app.use((req, res, next) => {
@@ -170,4 +172,8 @@ app.get("/v1/autocomplete", async (req, res) => {
 });
 
 // START SERVER
-module.exports = app;
+const PORT = 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});

@@ -90,13 +90,7 @@ Server running on http://localhost:3000
 3. Select district → subdistrict → village
 4. Use search to find villages
 5. Click on a village to select it
-
----
-
-## 🎥 Demo Video
-
-(Add your Google Drive video link here)
-
+   
 ---
 
 ## 📌 Future Improvements
